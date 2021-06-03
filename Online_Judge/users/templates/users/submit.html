@@ -1,0 +1,66 @@
+{% extends "users/layout.html" %}
+{% block body %}
+
+<aside class="col-md-11 blog-sidebar"> 
+
+<div class="mt-5">
+  <div class="mr-0">
+    <div class="float-right">
+      <div class="card border-info mb-3" style="max-width: 18rem;">
+        <div class="card-header" style="font-size: larger;">Problem Tags</div>
+        <div class="card-body text-info">
+         <!-- <h5 class="card-title">Heading / Title</h5> -->
+          <div class="card-text">
+          <ul>
+          {% for tag in tags %}
+          <li> {{tag}} </li>
+          {% endfor %}
+          <!-- <li> dfs
+          <li> segment tree -->
+          </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card border-success mb-3" style="max-width: 18rem;">
+        <div class="card-header" style="font-size: larger;">Lab #{{ question.contest.id }}-Material</div>
+        <div class="card-body text-success">
+          <!--<h5 class="card-title">Heading / Title</h5>-->
+          {% if blog_id != 0 %}
+            <p class="card-text"><a href="{% url 'blog' blog_id %}">Tutorial</a></p>
+          {% else %}
+            <p class="card-text">No Tutorial yet...</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</aside>
+
+
+<main role="main" class="container">
+
+<div class="w-75">
+<form action="{% url 'submit' ques_id %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1"><h3>Problem- {{name}}</h3></label>
+    <!-- <form class="form-inline">
+  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label> -->
+  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="lang">
+    <!-- <option val>Language</option> -->
+    <option value="cpp">C++</option>
+    <option value="py">Python</option>
+    <option value="c">C</option>
+  </select>
+  <!-- </form> -->
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="15" name="code"></textarea>
+  </div>
+  <div class="mx-auto" style="width: 100px;">
+    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+  </div>
+</form>
+</div>
+</main>
+
+{% endblock %}
